@@ -1,7 +1,9 @@
 package com.game.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -22,11 +24,9 @@ public class Player {
     @Column(name = "title", length = 30, nullable = false)
     private String title;
 
-
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private Race race;
-
 
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
@@ -40,6 +40,16 @@ public class Player {
 
     @Column(name = "level", nullable = false)
     private Integer level;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date")
+    private Date modifyDate;
 
     public Player() {
     }
@@ -117,5 +127,13 @@ public class Player {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public Date getModifyDate() {
+        return modifyDate;
     }
 }
